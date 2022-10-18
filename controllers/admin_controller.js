@@ -4,9 +4,9 @@ const User = require("../models/user"); //Student model
 //controller to add an employee by admin
 module.exports.registerEmployee = async function (req, res) {
   try {
-    let admin = await User.findById(req.body.id);
+    let admin = await User.findById(req.params.id);
 
-    if (admin && req.params.adminid === res.locals.user.id) {
+    if (admin && req.params.id === res.locals.user.id) {
       if (req.body.password != req.body.confirm_password) {
         //if the password and confirm passwords didn't match
         req.flash("error", "Password and confirm passord didn't match");
@@ -28,6 +28,7 @@ module.exports.registerEmployee = async function (req, res) {
             }
             //flash message indicating success
             req.flash("success", "New employee created successfully");
+
             return res.redirect("/admin-dashboard/" + admin.id);
           });
         } else {
@@ -191,7 +192,6 @@ module.exports.deleteEmployee = async function (req, res) {
           employees: employees,
         });
       } else {
-        req.flash("error", `employee does not exist`);
         return res.redirect("/admin-dashboard/" + admin.id);
       }
     } else {
