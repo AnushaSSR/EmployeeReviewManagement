@@ -1,0 +1,38 @@
+/* body styling
+body {
+    overflow-x: hidden;
+} */
+
+/*header background color */
+header {
+    background-color: #d353cd;
+}
+
+/* Styling for the navigation bar */
+/* Justifying the navbar content */
+.navbar-expand-lg .navbar-collapse {
+    justify-content: space-around;
+}
+
+/*sets the navigation item margin*/
+.nav-item {
+    margin-left: 80px;
+    align-self: center;
+}
+
+/*links color and font weight*/
+.navbar li a {
+    color: black;
+    font-weight: bold;
+}
+
+/*sets the properties of the btn to dwonload the report, hover effect */
+.btn-hover {
+    color: black;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.btn-hover:hover {
+    background-color: gold;
+}

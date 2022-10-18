@@ -1,0 +1,48 @@
+/*set background color*/
+main {
+    /* background-color: azure; */
+}
+
+/*border for body*/
+body {
+    border: 2px solid #d353cd;
+}
+
+
+/*Sign up div styling */
+
+/*Set margin to div and align the contents*/
+
+#signup {
+    margin: 5% 10%;
+    text-align: center;
+    width: 80%;
+}
+
+/*align the form into center and adjust width*/
+#signup-form {
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+}
+#gender-selection  {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/*setting the outline of the form input*/
+.form-outline {
+    color: #d353cd;
+    background-color: #d353cd;
+}
+
+.text {
+    background-color: white;
+    color: #d353cd;
+    border: 1px solid #d353cd;
+}
+/*set the background color of the sign up button */
+.btn-primary {
+    background-color: #d353cd;
+}

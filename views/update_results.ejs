@@ -1,0 +1,72 @@
+<!-- Style sheet link -->
+<link rel="stylesheet" href="/css/update_results.css">
+
+<%if (locals.user){ %>
+    <h3> Update results of the students: Attended interview held by <%= interview.company_name %> </h3>
+    <!-- Update results section -->
+    <section id="update-results" >
+        <!-- <Results container -->
+        <div id="students-results-container">
+            <% for (s of interview.studentsList){ %>
+                <hr>
+                <!-- Update Result form -->
+                <form action="/interviews/update-results/<%= interview._id%>" method="POST" >
+                    <!-- Student result card -->
+                    <div class="card student-result-card">
+                        <!-- Card header : Date -->
+                        <div class="card-header" id="interview-date">
+                            <p><% let dateVal = new Date(interview.date);
+                            let date= (dateVal.toLocaleString('en-GB', {day:'numeric', month: 'long', year:'numeric'})); %>
+                            Interview held on <%= date.toString();%></p>
+                        </div>
+                        <!-- Card header : Date -->
+                        
+                        <!-- Card Body-->
+                        <div id="card-body-divs">
+                            <!-- Card Body : Name and batch -->                       
+                            <div class="card-body">
+                                <p class="card-text" class="student-name"> Name: <%= s.student.name %></p>
+                                <p class="card-text" class="student-batch">Batch: <%= s.student.batch %></p>
+                            </div>   
+                            <!-- Card Body : Name and batch -->
+
+                            <!-- Card Body : Result -->
+                            <div class="card-body">
+                                <p class="card-text" class="student-batch">Result: <%= s.result %></p>
+                            </div>
+                            <!-- Card Body : Result -->
+                            
+                            <!-- Card Body : Update Result Dropdown -->
+                            <div class="card-body">
+                                <p>
+                                    <select name="result"> 
+                                        <option value=" " selected disabled><%= s.result %>  </option>
+                                        <option value="PASS" >PASS</option>
+                                        <option value="FAIL">FAIL</option>
+                                        <option value="ON_HOLD">ON_HOLD</option>
+                                        <option value="DIDNT_ATTEMPT">DIDNT_ATTEMPT</option>
+                                    </select>
+                                </p>
+                            </div>
+                            <!-- Card Body : Update Result Dropdown -->
+                        </div>
+                        <!-- Card Body-->
+                      
+                        <!-- Card Footer: Update result button-->                     
+                        <div class="card-footer">
+                                <input type="hidden" name="student" value="<%= s.student.id %>">
+                                <input class="btn btn-primary" type="submit" value="Update" id="update" title="update results of <%= s.student.name %>" >
+                        </div>
+                        <!-- Card Footer: Update result button-->
+                    </div>
+                    <!-- Student result card -->
+                    
+                </form>
+                <!-- Update Results form -->
+                <hr>
+            <% } %>  
+        </div> 
+        <!-- <Results container -->
+    </section> 
+    <!-- Update results section -->
+<% } %>

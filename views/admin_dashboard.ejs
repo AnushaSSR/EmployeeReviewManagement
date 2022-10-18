@@ -1,0 +1,134 @@
+{<%= title %>
+<link rel="stylesheet" href="/css/admin_dashboard.css"><!-- Style sheet link -->
+<%if (locals.user){ %>
+<!-- <Student details -->
+<section id="employee-details">
+<div>
+            
+      admin is <%= admin._id %> , <%= admin.name %> </admin>
+     <h4> Employees Details</h4>
+      <div class="card" style="width: 18rem;">
+        <div class="card-header">
+          
+        </div>
+
+
+        <div class="card-header">
+          <% for(e of employees) { %>
+                <div><span><%= e.name %></span>
+
+                <!-- <input type="hidden" name="empid" class="btn btn-primary btn-block mb-4" value="<%= e._id %>">
+            
+                <input type="submit" class="btn btn-primary btn-block mb-4" value="View Details"> -->
+          <a href="/admin/manage-profile/<%= e._id %>/<%=admin._id %>">Manage Profile</a>
+          <a href="/admin/manage-reviews/<%= e._id %>/<%=admin._id %>">Manage Reviews</a>
+
+
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="add-new-employee">
+    <div id="signup">
+    <h4 class="text"> Add New Employee</h4>
+    <div id="signup-form">
+        <!-- Add Employee Form -->
+        <form action="/admin/register-employee/<%= admin._id %>" method="POST">
+            <!-- Name Input -->
+            <div class="form-outline mb-4">
+                <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    placeholder="Employee User Name"
+                    required
+                >
+            </div>
+            <!-- Name Input -->
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Employee Email"
+                    class="form-control"
+                    required
+                >
+            </div>
+            <!-- Email input -->
+            <!-- Age input -->
+            <div class="form-outline mb-4">
+                <input
+                    type="number"
+                    name="age"
+                    placeholder="Enter Employee's age"
+                    class="form-control"
+                    required
+                >
+            </div>
+            <!-- Age input -->
+            <!-- Gender input -->
+            <div class="form-outline mb-4 text">
+                <p>Select Employee's Gender:</p>
+                <div id="gender-selection">
+                    <span>
+                        <input type="radio" name="gender" value="male">
+                        Male
+                    </span>
+                    <span>
+                        <input type="radio" name="gender" value="female">
+                        Female
+                    </span>
+                    <span>
+                        <input type="radio" name="gender" value="not-revealed">
+                        Prefer not to reveal
+                    </span>
+                </div>
+            </div>
+            <!-- Gender input -->
+            <!-- Phone number input -->
+            <div class="form-outline mb-4">
+                <input
+                    type="number"
+                    name="phone_number"
+                    placeholder="Employee phone number"
+                    class="form-control"
+                    required
+                >
+            </div>
+            <!-- Phone number input -->
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter Password"
+                    class="form-control"
+                    required
+                >
+            </div>
+            <!-- Password input -->
+            <!-- Confirm Password input -->
+            <div class="form-outline mb-4">
+                <input
+                    type="password"
+                    name="confirm_password"
+                    class="form-control"
+                    placeholder="Confirm Password"
+                    required
+                >
+            </div>
+            <!-- Confirm Password input -->
+            <!-- Sign Up -->
+            <input type="submit" class="btn btn-primary btn-block mb-4" value="Add Employee">
+            <!-- Sign Up -->
+        </form>
+    </div>
+</div>
+      </form>
+    
+    <div>
+  </section>
+<% } %>}

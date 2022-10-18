@@ -1,0 +1,38 @@
+<%= title %>
+<!-- Style sheet link -->
+<%if (locals.user){ %>
+<!-- <Student details -->
+  <section id="employee-details">
+    <div>
+     <h4> Employee Details</h4>
+      <div class="card" style="width: 18rem;">
+        <div class="card-header">
+          <h5><%= employee.name %></h5>
+        </div>
+        <div class="card-header">
+          <%= employee.name %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="feedback-required">
+    <% for(f of employee.assigned_reviews) { %>
+      <form>
+        <h4> Pending Reviews</h4>
+        <ul>
+        <li>
+          <a href="/employee/feedback-form/<%= employee.id %>/<%= f.id %>">    <div>       
+                <p><span>Name:<%= f.name %></span></p>
+                <p><span>Gender:<%= f.gender %></span></p>
+              </div> </a>
+            </div>
+         
+            
+          </li>
+        </ul>
+      </form>
+    <%}%>
+    <div>
+  </section>
+<% } %>

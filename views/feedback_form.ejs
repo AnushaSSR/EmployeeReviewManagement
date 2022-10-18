@@ -1,0 +1,65 @@
+<%= title %>
+
+<section id="feedback-form">
+  <div class="card">
+    <h3> Hi, <%= reviewer.name %></h3>
+    <h5> Rate the employee <%= employee.name %> in different categories on a scale of 5</h5>
+    <h6> 1 for the lowest rating,5 being the top</h6>
+    <% let path %>
+    <% if(reviewer.role == "Employee") {
+      path="/employee/submit-feedback";
+    } else {%>
+     <% path="/admin/submit-feedback"  %>
+    <% }%>
+
+
+      
+<form action=<%= path %> method="POST">
+
+    <div class="card-body">
+      <input type="hidden" name="reviewerId" value="<%= reviewer.id %>">
+      <input type="hidden" name="employeeId" value="<%= employee.id %>">
+
+      <div> 
+        <span>How would you rate your colleague for teamwork ?</span>
+        <span> 
+          <input type="radio" name="teamwork" value="1" required> 1
+          <input type="radio" name="teamwork" value="2"> 2
+          <input type="radio" name="teamwork" value="3"> 3
+          <input type="radio" name="teamwork" value="4"> 4
+          <input type="radio" name="teamwork" value="5"> 5      
+        </span>
+      </div>
+
+      <div>
+        <span> How would you rate your colleague for work knowledge?</span>
+        <span>
+          <input type="radio" name="knowledge" value="1" required> 1
+          <input type="radio" name="knowledge" value="2"> 2
+          <input type="radio" name="knowledge" value="3"> 3
+          <input type="radio" name="knowledge" value="4"> 4
+          <input type="radio" name="knowledge" value="5"> 5      
+        </span>
+      </div>
+      <div>
+        <span> How would you rate your colleague for communication with team ?</span>
+        <span>
+          <input type="radio" name="communication" value="1" required> 1
+          <input type="radio" name="communication" value="2"> 2
+          <input type="radio" name="communication" value="3"> 3
+          <input type="radio" name="communication" value="4"> 4
+          <input type="radio" name="communication" value="5"> 5      
+        </span>
+      </div>
+   
+      <div>
+        <span>
+          Add further feedback, mentioning the points you would like to highlight about your collegue         
+        </span>
+        <span> <textarea id="feedback" name="feedback" rows="4" cols="50" placeholder="Enter text here..."></textarea> </span>
+      </div>  
+
+        <input type="submit" name="submit feedback" value="Submit Feedback">
+       </div>
+</form>
+</section>

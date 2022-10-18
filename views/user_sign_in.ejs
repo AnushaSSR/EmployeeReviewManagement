@@ -1,0 +1,46 @@
+<!-- <form to send the data to create session -->
+<!-- Style sheet link -->
+<link rel="stylesheet" href="/css/signin.css">
+<!-- Sign in Div -->
+<div id="signin">
+    <h4 class="text"> Sign In Form</h4>
+    <div id="signin-form">
+        <!-- Sign in form  -->
+        <form action="/create-session" method="POST">
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <input
+                    type="email text"
+                    name="email"
+                    class="form-control"
+                    placeholder="Registered Email"
+                    required
+                >
+            </div>
+            <!-- Email input -->
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Password"
+                    required
+                >
+            </div>
+            <!-- Password input -->
+            <!-- Register buttons -->
+            <div class="text-center">
+                <p>
+                    Not Registered?
+                    <a href="/sign-up">Register</a>
+                </p>
+            </div>
+            <!-- Register buttons -->
+            <!-- Signin button -->
+            <input type="submit" class="btn btn-primary btn-block mb-4" value="Sign In">
+            <!-- Signin button -->
+        </form>
+        <!-- Sign in form  -->
+    </div>
+</div>
