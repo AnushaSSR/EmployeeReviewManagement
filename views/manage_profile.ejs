@@ -1,0 +1,173 @@
+<link rel="stylesheet" href="/css/manage_profile.css"> <!-- Styling sheet link -->
+<!-- if user is logged in -->
+<% if(locals.user) {%>
+  <!-- Manage Employee profile section -->
+  <section id="manage-employee-profile">
+    <!-- <Navigate to links section -->
+    <section id="navigation">
+      <!-- Link to dashboard -->
+      <a href="/admin-dashboard/<%= locals.user.id %>" id="nav-dashboard" class="nav-text" ><i class="fa-solid fa-circle-chevron-left"></i> &nbspBack to Dashboard</a>
+      <!-- Link to manage review -->
+      <a href="/admin/manage-reviews/<%= employee._id %>/<%=admin._id %>" id="nav-reviews" class="nav-text"> Manage Reviews of <%= employee.name %> &nbsp<i class="fa-solid fa-circle-chevron-right"></i> </a>
+    </section>
+    <!-- <Navigate to links section -->
+    <hr>
+    <!-- Update section -->
+    <section id="update">  
+      <!-- Employee details / edit Details Section -->
+      <section id="update-details">
+        <!-- Employee Details update form -->
+        <form action="/admin/update-details/<%= employee.id%>/<%=admin.id %>" method="POST">
+          <!-- Employee Details card with edit link -->
+          <div class="card" style="width: 35rem;">
+            <!-- Employee Details card header -->
+            <div class="card-header">
+              <h5> Employee Details Card</h5>
+              <!-- Edit details icon  -->
+              <span id="edit-details" onclick="openInput()" ><span  id="text-value">Edit details </span> <i id="icon-edit" class="fa-solid fa-pen"></i> </span>
+              <!-- Edit details icon  -->
+            </div>
+            <!-- Employee Details card header -->
+            <!-- Employee Details Body -->
+            <div id="details-body">
+              <!-- Employee Details Body  with avatar and infr4omation-->
+              <div class="card-body" id="gender-avatar" >
+                <% if( employee.gender == "Female"){%>
+                  <img class="avatar" src="/images/female.jpg"> 
+                <% } else if( employee.gender == "Male"){%>
+                  <img class="avatar" src="/images/male.jpg"> 
+                <% } else if( employee.gender == "Not_revealed"){%>
+                  <img class="avatar" src="/images/gender neutral.png"> 
+                <% } %>
+              </div>
+              <div class="card-body" id="details">
+                <p>
+                  <span>Name : </span>
+                  <span class="value" style="display: inline;"><%= employee.name %></span>
+                  <input class="edit" type="text" style="display: none;" name="name" id="name" placeholder="<%= employee.name %>">
+                </p>
+                <p>
+                  <span id="value">Email : <%= employee.email %></span>
+                </p>
+                <p>
+                  <span>Age : </span>
+                  <span class="value" style="display: inline;"><%= employee.age %></span>
+                  <input class="edit" type="number" style="display: none;" name="age" id="age" placeholder="<%= employee.age %>">
+                </p>
+                <p>
+                  <span>Gender : </span>
+                  <span class="value" style="display: inline;"><%= employee.gender %></span>
+                  <select name="gender" id="gender" class="form-select edit" style="display: none;" >
+                    <option value="" disabled selected> selected: <%= employee.gender %></option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Not_revealed">Dont reveal</option>
+                  </select>
+                </p>
+                <p>
+                  <span>Mobile : </span>
+                  <span class="value" style="display: inline;"><%= employee.phone_number %></span>
+                  <input class="edit" type="number" style="display: none;" name="number" id="gender" size="10" placeholder="<%= employee.phone_number %>">
+                </p>
+                <p><span id="value">Role : <%= employee.role %></span></p>
+              </div>
+              <!-- Employee Details Body  with avatar and infr4omation-->
+            </div>
+            <!-- Employee Details Body -->
+            <!-- Employee Details card Footer -->
+            <div class="card-footer edit text-center" style="display: none;">  
+              <!-- update details button        -->
+              <input class="edit btn btn-primary " type="submit" name="update" style="display: none;" value="Update Employee Details">
+            </div>
+            <!-- Employee Details card Footer -->
+          </div>
+          <!-- Employee Details card with edit link -->
+        </form>
+         <!-- Employee Details update form -->
+      </section>
+      <!-- Employee details / edit Details Section-->
+     
+    
+      <!-- Employee Role update section -->
+      <section id="update-role">
+        <!-- Employee Role update card -->
+        <div class="card text-center" style="width: 25rem;" id="role">
+        <!-- Employee Role update card -->
+          <!-- Employee Role update card header -->
+          <div class="card-header "><h4 >Update Role</h4></div>
+          <!-- Employee Role update card header -->
+          <!-- Employee Role update form -->
+          <form action="/admin/update-role/<%= employee.id%>/<%=admin.id %>" method="POST">
+            <!-- Employee Role Update card body -->
+            <div class="card-body">  
+              <p>Current Role of <b>"<%= employee.name %>"</b> : <b><%= employee.role %></b></p>
+              <!-- Role Input -->
+              <input type="radio" name="role" value="Employee"> Employee
+              <input type="radio" name="role" value="Admin"> Admin
+              <!-- Role Input -->
+            </div>
+            <!-- Employee Role Update card body -->
+            <!-- Employee Role Update card footer -->
+            <div class="card-footer"> 
+              <!-- Update Role Button -->
+              <input type="submit" class="btn btn-primary" name="Update Role" value="Update Role">
+              <!-- Update Role Button -->
+            </div>
+            <!-- Employee Role Update card body -->
+          </form>
+          <!-- Employee Role update form -->
+      </section>
+      <!-- Employee Role update section -->
+    
+    </section>
+    <!-- Update section -->
+    <hr>
+    <!-- <Delete employee Section -->
+    <section id="delete-employee">
+    <!-- <Delete employee Form -->   
+    <form action="/admin/delete-employee/<%= employee.id%>/<%=admin.id %>" method="POST"> 
+      <!-- Delete Employee Button   -->
+      <div class="text-center"><input type="submit" class="btn btn-primary" name="delete" value="Delete Employee"></div>
+      <!-- Delete Employee Button   -->
+      <input type="hidden" name="id" value="<% admin.id %>">
+    </form>
+    <!-- <Delete employee Form -->
+    </section>
+     <!-- <Delete employee Section -->
+ 
+  </section>
+  <!-- Manage Employee profile section -->
+  
+  <!-- Script for onclick event on editdetails -->
+  <script>
+    function openInput() {
+      const inputs= document.getElementsByClassName("edit");
+      for(i of inputs) {
+        if (i.style.display=='none') {
+            i.style.display = 'inline';
+        } else {
+          i.style.display = 'none';   
+        }
+      }
+      const editText = document.getElementById("text-value");
+      const editIcon= document.getElementById("icon-edit")
+      if( editText.innerHTML == "Close") {
+      editText.innerHTML = "Edit details";
+      editIcon.style.display = 'inline';
+      } else {
+        editText.innerHTML= "Close"
+        editIcon.style.display = 'none';
+      }
+  
+      const values= document.getElementsByClassName("value");
+      for(v of values) {
+        if (v.style.display=='inline') {
+            v.style.display = 'none';
+        } else {
+          v.style.display = 'inline';   
+        }
+      }     
+    }
+  </script>
+  <!-- Script for onclick events on editdetails -->
+<% } %>

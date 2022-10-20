@@ -1,0 +1,47 @@
+/* Submit feedback section styling */
+
+/* aligning the feedback form */
+#feedback-form {
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid purple;
+  width: 95%;
+  border-radius: 5px;
+}
+
+/* aligning and display of rating card */
+.rating-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #d353cd;
+  width: 85%;
+  margin-top: 2%;
+  border-radius: 5px;
+}
+
+/* aligning and display of rating details and rating span */
+.rating-detail,
+.rating {
+  font-weight: bold;
+  margin-left: 2%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+/* aligning and display of rating span */
+.rating {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Submit feedback button styling */
+.btn-primary {
+  background-color: #d353cd;
+  margin-top: 2%;
+}

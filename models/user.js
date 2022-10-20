@@ -23,12 +23,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    //user's age
     age: {
       type: Number,
       required: true,
     },
+    //user's gender
     gender: {
       type: String,
+      enum: ["Male", "Female", "Not_revealed"],
       required: true,
     },
 
@@ -38,20 +41,21 @@ const userSchema = new mongoose.Schema(
       default: "Employee",
       enum: ["Employee", "Admin"],
     },
+    //Assigned reviews to user
     assigned_reviews: [
       {
         type: mongoose.Schema.Types.ObjectId,
         model: "User",
       },
     ],
-
+    //Assigned reviewers to user
     assigned_reviewers: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
     ],
-
+    //Reviews list of user
     reviews: [
       {
         type: mongoose.Schema.Types.ObjectId,

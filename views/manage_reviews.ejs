@@ -1,208 +1,286 @@
-<%= title %>
+<link rel="stylesheet" href="/css/manage_reviews.css"> <!-- Styling sheet link -->
 <% if(locals.user) { %>
-
-  <section id="add-reviews">
-    <div>
-     
-        <form action=""method="">
-              <div class="card-body">
-                <input type="hidden" name="adminid" value="<%= admin.id %>">
-                <input type="hidden" name="employeeid" value="<%= employee.id %>">
+  <h4 class="text-center"> Manage Reviews of Employee: <%= employee.name %></h5>
+      
+  <!-- Manage Employee Review section -->
+  <section id="manage-employee-reviews">
+    <!-- <Navigate to links section -->
+    <section id="navigation">
+      <!-- Link to dashboard -->
+      <a href="/admin-dashboard/<%= locals.user.id %>" id="nav-dashboard" class="nav-text" ><i class="fa-solid fa-circle-chevron-left"></i> &nbspBack to Dashboard</a>
+      <!-- Link to manage review -->
+      <a href="/admin/manage-profile/<%= employee._id %>/<%=admin._id %>" id="nav-reviews" class="nav-text"> Manage Profile of <%= employee.name %> &nbsp<i class="fa-solid fa-circle-chevron-right"></i> </a>
+    </section>
+    <!-- <Navigate to links section -->
+    <hr>
   
-                <a href="/admin/feedback-form/<%= employee.id %>/<%= admin.id %>"><input type="button" name="Add review" value="Add Review"></a>
-                </div>
-              <input type="hidden" name="id" value="<% admin.id %>">           
-           
-        </form>
-   
-     </div>
-  </section>
+    <!-- section to add review -->
+    <section id="add-reviews">
+      <div>
+        <!-- Link to redirect to feedback form -->
+        <div class="card-body text-center" >
+          <a href="/admin/feedback-form/<%= employee.id %>/<%= admin.id %>">
+            <input type="button" class="btn btn-primary" name="Add review" value="Add Review">
+          </a>
+        </div>
+        <!-- Link to redirect to feedback form -->
+      </div>
+    </section>
+    <!-- section to add review -->
+    <hr>   
   
-  
-  
-  <section id="assign-reviewers">
-    <div>
-      <h5>To Employee: <%= employee.name %></h5>
-      <h4> Assign Reviewers</h4>
-      <% for(e of employees) { %>
-        <form action="/admin/assign-to-review/<%= e._id%>/<%= employee._id%>"method="POST">
-          <% if(!(e._id.equals(employee._id))) { %>
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <div>
-                  <p><span>Name:<%= e.name %></span></p>
-                  <p><span>Age:<%= e.age %></span></p>
-                  <p><span>Gender:<%= e.gender %></span></p>
-                </div>
-              </div>
-              <input type="hidden" name="id" value="<% admin.id %>">           
-              <% let assignedReviewer = employee.assigned_reviewers.filter((a) => { 
-                return a.equals(e.id);
-              }); %>     
-              <% if(assignedReviewer.length) { %>
-                <input type="submit" name="Assign Review" value="Assigned for review" disabled>  
-              <% } else { %>
-                <input type="submit" name="Assign Review" value="Assign to review">  
-              <% } %> 
-              <input type="hidden" name="admin" value="<%= admin._id %>" >     
-            </div>
-          <% } %>
-        </form>
-      <% } %>
-    </div>
-  </section>
-  <section id="Assigned-reviewers-details">
-    <div>
-      <h5>Reviewers assigned to employee: <%= employee.name %> are:</h5>
-      <% for(e of employee.assigned_reviewers) { %>
-        <form action=""method="POST">
-              <div class="card-body">
-                <div>
-                  <span>Assigned to :<%= e.name %></span>
-                  <%let dateVal = new Date(e.createdAt);
-                  let date= (dateVal.toDateString());%>  
-
-                  <span>Assigned on:<%= date %></span>
-
-                </div>
-              </div>
-              <input type="hidden" name="id" value="<% admin.id %>">           
-           
-        </form>
-      <% } %>
-    </div>
-  </section>
-
-  <section id="submitted-reviews-details">
-    <div>
-      <h5>Reviews Submitted to employee: <%= employee.name %> are:</h5>
-      <% for(review of reviews) { %>
-     
-        <form action="/admin/update-ratings" method="POST">
-<input type="hidden" name="reviewid" value="<%= review.id %>">
-<input type="hidden" name="adminid" value="<%= admin.id %>">
-<input type="hidden" name="empid" value="<%= employee.id %>">
-
-
-          <ul class="student-list">
-                <li class="list-group-item child">
-                    <!-- Student card -->
-                    <div class="card" style="width: 18rem;">
-                        <!-- Student card header-->
-                        <div class="card-header key-value name-span">
-                            <span class="key"><%=review.reviewed_by.name %> <%= review.reviewed_by._id%></span>   
-                            <span class="value"><a id="view-details-<%= review.reviewed_by._id %>" class="view-details" onclick="openDetails('<%= review.reviewed_by._id%>')">View Details</a></span>
-                        </div>
-                        <!-- Student card header-->
-                        <!-- Student details list-->
-                        <ul id="reviewer-<%= review.reviewed_by._id%>" class="list-group list-group-flush" style="display :none;">
-                            <li class="list-group-item key-value">
-                              <span class="key">Reviewer Name:</span>
-                              <span><%=review.reviewed_by.name %></span>
-                            </li>
-                            <li class="list-group-item key-value">
-                              <span class="key">teamwork:</span>
-                              <span class="value" style="display: inline;"><%=review.teamwork %></span>
-                              <select name="teamwork" id="teamwork" class="form-select edit" style="display: none;">
-                                <option value="" disabled selected>selected: <%=review.teamwork %> </option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-
-                            </li>
-                            <li class="list-group-item key-value">
-                              <span class="key">Knowledge:</span>
-                              <span class="value" style="display: inline;">selected: <%=review.work_knowledge %></span>
-                              <select name="knowledge" id="teamwork" class="form-select edit" style="display: none;" >
-                                <option value="" disabled selected> selected: <%=review.work_knowledge %></option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-
-                            </li>
-                            <li class="list-group-item key-value">
-                              <span class="key">Communication:</span>
-                              <span class="value"  style="display: inline;"><%=review.communication_with_team %></span>
-                              <select name="communication" id="teamwork" class="form-select edit" style="display: none;" >
-                                <option value="" disabled selected>selected: <%=review.communication_with_team %></option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-
-                            </li>
-                            <%let dateVal = new Date(review.createdAt);
-                            let date= (dateVal.toLocaleString());%>  
-
-                            <li class="list-group-item key-value">
-                              <span class="key">Reviewed on:</span>
-                              <span ><%= date %></span>
-                            </li>
-
-                            <li>
-                              <span id="edit-details" onclick="openInput()">Edit Ratings
-                                <i class="fa-solid fa-pen"></i>
-                              </span>                            
-                            </li>
-
-                            <li>
-                              <div>
-                                <input class="edit" type="submit" name="update" style="display: none;" value="Update Ratings">
-                              </div>
-                    
-                            </li>
-                        </ul>                    
-                        <!-- Student details list-->
+    <!-- <Reviewer assignment -->
+    <div id="reviewer-assignment">
+      <!-- Assign reviewer section--> 
+      <section id="assign-reviewers">
+        <div class="text-center"><h5> Assign Reviewers to employee: <%= employee.name %></h5></div>
+        <!-- Reviewers list-->
+        <div id="reviewers">
+          <% if(employees.length) { %>
+            <% for(e of employees) { %>
+              <% if(!(e._id.equals(employee._id))) { %>
+                <!-- Assign Reviewer form -->
+                <form action="/admin/assign-to-review/<%= e._id%>/<%= employee._id%>" method="POST" id="reviewer">
+                  <!-- Reviewer list card-->
+                  <div class="card" style="width: 12rem;">
+                    <div class="card-body">
+                      <!-- Reviewer Details-->
+                      <div id="reviewer-details">
+                        <p class="details">
+                          <span class="details">Name   : </span>
+                          <span class="details"><%= e.name %></span>
+                        </p>
+                        <p class="details">
+                          <span class="details">Gender : </span>
+                          <span class="details"><%= e.gender %></span>
+                        </p>
+                      </div>
+                      <!-- Reviewer Details-->
                     </div>
-                    <!-- Student card -->                       
-                </li>
-                <br>
-        </ul>
-        <!-- List :Students -->  
-    </div>
-    <!-- <Student details Container -->
-
-              <div class="card-body">
-                <div>
-                 <%  for(review of reviews) {%>
-                  
-                  <% } %> 
-
-                  <span>Reviewed By: <%= review.reviewed_by.name %></span>
+                    <input type="hidden" name="id" value="<% admin.id %>">     
+                    <!-- Reviewer list card footer-->
+                    <div class="card-footer"> 
+                      <% let assignedReviewer = employee.assigned_reviewers.filter((a) => { 
+                        return a.equals(e.id);
+                      }); %>  
+                      <!-- Assign Reviewer Button-->
+                      <div class="text-center">  
+                        <% if(assignedReviewer.length) { %>
+                          <input type="submit" name="Assign Review" class="btn btn-primary" value="Assigned for review" disabled>  
+                        <% } else { %>
+                          <input type="submit" name="Assign Review" class="btn btn-primary" value="Assign to review">  
+                        <% } %> 
+                      </div>
+                      <!-- Assign Reviewer Button-->
+                      <input type="hidden" name="admin" value="<%= admin._id %>" > 
+                    </div>  
+                    <!-- Reviewer list card footer--> 
+                  </div>
+                  <!-- Reviewer list card-->
                 
-                  <span>Reviewed on:<%= date %></span>
+                </form>
+                <!-- Assign Reviewer form -->
+              <% } %> 
+            <% } %>
+          <% } else { %>
+            <p class="text">No Employees available to  assign</p>
+          <% } %>
+        </div>
+        <!-- Reviewer list-->
+      </section>
+      <!-- Assign reviewer section-->
 
-                  <span> Total Rating : <%= review.teamwork+review.work_knowledge+review.communication_with_team %></span>
-
-                </div>
-              </div>
-              <input type="hidden" name="id" value="<% admin.id %>">           
-           
-        </form>
-   
-      <% } %> 
+      <!-- Assigned reviewer section-->
+      <section id="assigned-reviewers-details">
+        <div class="text-center">
+          <h5>Reviewers assigned  are:</h5>
+        </div>
+        <!-- Assigned reviewers-->     
+        <div id="assigned-list">
+          <% if(employee.assigned_reviewers.length) { %>
+            <% for(e of employee.assigned_reviewers) { %>
+              <!-- Assigned reviewers list-->     
+              <ul class="assigned-list">
+                <!-- Assigned reviewer list item -->
+                <li class="list-group-item child">
+                  <!-- Assigned reviewer card -->
+                  <div class="card" style="width: 28rem;">
+                      <!-- Assigned Reviewer card header-->
+                      <div class="card-header key-value name-span">
+                        <!-- Assigned Reviewer name-->
+                        <p class="details">
+                          <span>Assigned to : </span>
+                          <span><%= e.name %></span>
+                        </p>
+                        <%let dateVal = new Date(e.createdAt);
+                        let date= (dateVal.toDateString());%>  
+                        <!-- Assigned Date-->
+                        <p class="details">
+                          <span>Assigned on : </span>
+                          <span><%= date %></span>
+                        </p>
+                      </div>
+                      <!-- Assigned Reviewer card header-->
+                  </div>
+                  <!-- Assigned reviewer card -->
+                </li>
+                <!-- Assigned reviewer list item -->
+              </ul>
+              <!-- Assigned reviewers list-->   
+              <input type="hidden" name="id" value="<% admin.id %>">                 
+            <% } %>
+          <% } else { %>
+            <p class="text">No Reviewers Assigned</p>
+          <% } %>
+        </div>
+        <!-- Assigned reviewers-->
+      </section>
+      <!-- Assigned reviewer section-->
     </div>
+    <!-- <Reviewer assignment -->
+
+    <hr>
+
+    <!-- Submitted Reviews Details -->
+    <section id="submitted-reviews-details" class="text-center">
+      <div class="text-center">
+        <h5>Reviews Submitted to employee <%= employee.name %> </h5>
+      </div>
+      <!-- Submitted Reviews Details card -->
+      <div id="review-details-card">
+        <% if(reviews.length) { %>
+          <% for(review of reviews) { %>
+            <!-- Edit Submitted Reviews Rating form -->    
+            <form action="/admin/update-ratings" method="POST">
+              <input type="hidden" name="reviewid" value="<%= review.id %>">
+              <input type="hidden" name="adminid" value="<%= admin.id %>">
+              <input type="hidden" name="empid" value="<%= employee.id %>">
+              <!-- Submitted Reviews list -->
+              <ul class="submitted-list">
+                <li class="list-group-item child">
+                  <!-- Review card -->
+                  <div class="card" style="width: 25rem;">
+                    <!-- Review card header-->
+                    <div class="card-header key-value name-span">
+                      <span class="key">Reviewer: <%=review.reviewed_by.name %> </span>   
+                      <span class="key">Rating: <%= review.teamwork+review.work_knowledge+review.communication_with_team %> </span>   
+                      <!-- view Review details link -->
+                      <span class="value"><a id="view-details-<%= review._id %>" class="view-details" onclick="openDetails('<%= review._id%>')">View Details</a></span>
+                    </div>
+                    <!-- Review card header-->
+                    <!-- Rating details list-->
+                    <ul id="reviewer-<%= review._id%>" class="list-group list-group-flush" style="display :none;">
+                      <!-- Reviewed by list item-->
+                      <li class="list-group-item key-value">
+                        <span class="key">Reviewer Name:</span>
+                        <span><%=review.reviewed_by.name %></span>
+                      </li>
+                      <!-- Reviewed by list item-->
+
+                      <!-- Team work rating list item-->
+                      <li class="list-group-item key-value">
+                        <span class="key">teamwork:</span>
+                        <span class="value" style="display: inline;"><%=review.teamwork %></span>
+                        <select name="teamwork" id="teamwork" class="form-select edit" style="display: none;">
+                          <option value="" disabled selected>selected: <%=review.teamwork %> </option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
+                      </li>
+                      <!-- Team work rating list item-->
+
+                      <!-- Knowledge rating list item-->
+                      <li class="list-group-item key-value">
+                        <span class="key">Knowledge:</span>
+                        <span class="value" style="display: inline;"><%=review.work_knowledge %></span>
+                        <select name="knowledge" id="teamwork" class="form-select edit" style="display: none;" >
+                          <option value="" disabled selected> selected: <%=review.work_knowledge %></option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
+                      </li>
+                      <!-- Knowledge rating list item-->
+                      
+                      <!-- Communication rating list item-->                  
+                      <li class="list-group-item key-value">
+                        <span class="key">Communication:</span>
+                        <span class="value"  style="display: inline;"><%=review.communication_with_team %></span>
+                        <select name="communication" id="teamwork" class="form-select mb-4 edit" style="display: none;" >
+                          <option value="" disabled selected>selected: <%=review.communication_with_team %></option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
+                      </li>
+                      <!-- Communication rating list item-->
+
+                      <!-- Reviewed on list item-->
+                      <%let dateVal = new Date(review.createdAt);
+                      let date= (dateVal.toDateString());%>  
+                      <li class="list-group-item key-value">
+                        <span class="key">Reviewed on:</span>
+                        <span ><%= date %></span>
+                      </li>
+                      <!-- Reviewed on list item-->
+
+                      <!-- Link to edit Rating-->
+                      <li class="list-group-item text-center"  style="display: block;">
+                        <!-- edit ratings Button-->
+                        <span class="value" style="display: block;" id="edit-details" onclick="openInput('<%= review._id %>')">Edit Ratings
+                          <i class="fa-solid fa-pen"></i>
+                        </span>                            
+                      </li>
+                      <!-- Link to edit Rating-->
+                      
+                      <!-- Link to update Rating-->
+                      <li class="list-group-item edit text-center" style="display: none;">
+                        <div class="edit" style="display: none;">
+                          <!-- Update ratings Button-->
+                          <input  class="btn btn-primary" type="submit" name="update"  value="Update Ratings">
+                        </div>
+                      </li>
+                      <!-- Link to update Rating-->
+                    </ul>                    
+                    <!-- Rating details list-->
+                  </div>
+                  <!-- Review card -->                       
+                </li>
+              </ul>
+              <!-- List :Students -->
+            </form> 
+            <!-- Edit Submitted Reviews Rating form -->
+          <% } %>
+        <% } else { %>
+          <p class="text">No Reviews submitted</p>
+        <% } %>
+      </div>
+      <!-- Submitted Reviews Details card -->
+    </section>
+    <!-- Submitted Reviews Details -->
+
   </section>
-
-
+  <!-- Manage Employee Review section -->
+ 
+  <!-- Script to trigger on click events on view details and edit ratings links  -->
   <script>
     function openDetails(id) {
-        let std= document.getElementById("reviewer-"+id);
-        if (std.style.display=='none') {
-             std.style.display = 'block';
+        let review= document.getElementById("reviewer-"+id);
+        if (review.style.display=='none') {
+             review.style.display = 'block';
         } else {
-        std.style.display = 'none';   
+        review.style.display = 'none';   
         }
         let detailsLink= document.getElementById("view-details-"+id);
         if (detailsLink.innerText=='View Details') {
+    
              detailsLink.innerText = 'Close X';
              detailsLink.style.color= "brown";
         } else {
@@ -211,30 +289,23 @@
         }
     }
 
-
-    function openInput() {
-        const inputs= document.getElementsByClassName("edit");
-        for(i of inputs) {
-          if (i.style.display=='none') {
-             i.style.display = 'inline';
-          } else {
-            i.style.display = 'none';   
-          }
+    function openInput(id) {
+      const inputs= document.getElementsByClassName("edit");
+      for(i of inputs) {
+        if (i.style.display=='none') {
+            i.style.display = 'block';
+        } else {
+          i.style.display = 'none';   
         }
-    
-        const values= document.getElementsByClassName("value");
-        for(v of values) {
-          if (v.style.display=='inline') {
-             v.style.display = 'none';
-          } else {
-            v.style.display = 'inline';   
-          }
-        }
-     
-          
-        
       }
-    
-</script>
-
+      const values= document.getElementsByClassName("value");
+      for(v of values) {
+        if (v.style.display=='block') {
+            v.style.display = 'none';
+        } else {
+          v.style.display = 'block';   
+        }
+      } 
+    }
+  </script>
 <% } %>

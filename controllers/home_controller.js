@@ -1,10 +1,46 @@
-const passport = require("passport");
-const User = require("../models/user");
+const passport = require("passport"); //passport for authentication
+const User = require("../models/user"); //user model
+
+//controller to create admin
+module.exports.createAdmin = async function () {
+  const adminUser = {
+    name: "Admin",
+    email: "admin@gmail.com",
+    password: "login",
+    phone_number: 7897897890,
+    age: 67,
+    gender: "Female",
+    role: "Admin",
+  };
+
+  //fetch the user with the email
+  User.findOne({ email: adminUser.email }, function (err, user) {
+    if (err) {
+      console.log("error in creating admin");
+      return;
+    }
+
+    if (!user) {
+      // if user doesn't exist create a new record
+      User.create(adminUser, function (err, user) {
+        if (err) {
+          console.log("error in creating user while signing up");
+          return;
+        }
+        //flash message indicating success
+        console.log("Admin Created");
+      });
+    } else {
+      //if user already exists
+      console.log("error", "Admin already created");
+    }
+  });
+};
 
 //controller to render the home page
 module.exports.home = function (req, res) {
   return res.render("home_page", {
-    title: "Employee Review Management | Home Page",
+    title: "ERM | Home Page",
   });
 };
 
@@ -15,7 +51,7 @@ module.exports.signUp = function (req, res) {
     return res.redirect("/");
   }
   return res.render("user_sign_up", {
-    title: "Employee Review Management | Sign-up Page",
+    title: "ERM | Sign-up Page",
   });
 };
 
@@ -26,33 +62,40 @@ module.exports.signIn = function (req, res) {
     return res.redirect("/");
   }
   return res.render("user_sign_in", {
-    title: "Employee Review Management | Sign-in Page",
+    title: "ERM | Sign-in Page",
   });
 };
 
 //controller to get the signup data and create the user
-module.exports.create = function (req, res) {
+module.exports.create = async function (req, res) {
   if (req.body.password != req.body.confirm_password) {
     //if the password and confrim passwords didn't match
+    req.flash("error", "Password and confirm password didnt match!");
     return res.redirect("back");
   }
+
+  if (req.body.phone_number.length != 10) {
+    //if the password and confrim passwords didn't match
+    req.flash("error", "Enter valid 10 digit mobile number");
+    return res.redirect("back");
+  }
+
   //fetch the user with the email
   User.findOne({ email: req.body.email }, function (err, user) {
     if (err) {
-      console.log("error in finding user in signing up", err);
+      console.log("error in finding user in signing up");
       return;
     }
 
     if (!user) {
       // if user doesn't exist create a new record
       User.create(req.body, function (err, user) {
-        req.flash("success", "Signed up successfully, login to continue!");
-
         if (err) {
-          console.log("error in creating user while signing up", err);
+          console.log("error in creating user while signing up");
           return;
         }
         //flash message indicating success
+        req.flash("success", "Signed up successfully, login to continue!");
         return res.redirect("/sign-in");
       });
     } else {
@@ -80,7 +123,7 @@ module.exports.createSession = async function (req, res) {
     }
   } catch (err) {
     console.log(err);
-    res.redirect("/");
+    return res.redirect("/");
   }
 };
 
@@ -96,11 +139,14 @@ module.exports.employeeDashboard = async function (req, res) {
         path: "assigned_reviews",
         model: "User",
       });
-
-    if (req.isAuthenticated()) {
-      //if user is authenticated
+    //if user is authenticated and valid
+    if (
+      req.isAuthenticated() &&
+      employee &&
+      req.params.id === res.locals.user.id
+    ) {
       return res.render("employee_dashboard", {
-        title: "employee dashboard",
+        title: "ERM | Employee Dashboard",
         employee: employee,
       });
     }
@@ -118,13 +164,15 @@ module.exports.adminDashboard = async function (req, res) {
 
     let employees = await User.find({ role: "Employee" });
 
-    if (req.isAuthenticated()) {
-      //if user is authenticated
-      return res.render("admin_dashboard", {
-        title: "admin dashboard",
-        admin: admin,
-        employees: employees,
-      });
+    //if user is authenticated and valid
+    if (admin && req.params.id === res.locals.user.id) {
+      if (req.isAuthenticated()) {
+        return res.render("admin_dashboard", {
+          title: "ERM | Admin Dashboard",
+          admin: admin,
+          employees: employees,
+        });
+      }
     }
     return res.redirect("/");
   } catch (err) {

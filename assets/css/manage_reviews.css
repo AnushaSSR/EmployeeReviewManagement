@@ -1,0 +1,112 @@
+/* Styling to mange employee review section */
+#manage-employee-reviews {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/* Styling to navigateion buttons */
+/* Alignment and display of navigation icons */
+#navigation {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2%;
+}
+
+/* font styling for navigation text */
+.nav-text {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: black;
+}
+
+/*button color */
+.btn-primary {
+  background-color: #d353cd;
+}
+
+/* Assign reviewer section styling */
+
+/* alignment and y scroll on reviewer assignment div */
+#reviewer-assignment {
+  height: 400px;
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+/* width of assign reviewer */
+#assign-reviewers {
+  width: 55%;
+}
+
+#assigned-reviewers-details {
+  width: 40%;
+}
+/* Styling of assign reviewer list */
+#reviewers {
+  border-radius: 5px;
+  border: 2px solid purple;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+/* Styling of assign reviewer list item */
+#reviewer {
+  margin: 2px;
+  padding: 1px;
+  border: 2px solid #d353cd;
+  border-radius: 3%;
+}
+
+/* Styling of details of assign reviewer list item  */
+.details {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Display of key-value styling */
+.key-value {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Styling of submitted reviews */
+#submitted-reviews-details {
+  margin-right: auto;
+  margin-left: auto;
+  width: 80%;
+}
+
+/* Styling of submitted reviews */
+
+/* Review details card */
+#review-details-card {
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  border: 2px solid purple;
+}
+
+/* submitted reviews display */
+.submitted-list {
+  margin: 5px;
+  padding: 1px;
+  border: 2px solid #d353cd;
+  border-radius: 5px;
+}
+
+/*text styling for emptylist message*/
+.text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: black;
+}

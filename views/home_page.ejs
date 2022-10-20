@@ -3,21 +3,25 @@
 <!-- <Div : Home page Container  -->
 <div id="container">
     <!-- if user is logged in -->
-    <% if(locals.user) { %>
+    <% if(locals.user) {     
+        <!-- if user's role is ADMIN -->
+        if( locals.user.role =="Admin") { %>
+            <!-- <Div: Home icons -->
+            <div class="home-icons">
+                <!-- <Div: Admin Dashboard -->
+                <div class="hover icon-action"> <a href="/admin-dashboard/<%= locals.user.id %>"><div id="dashboard" class="icon"></div></a><h4>Dashboard</h4></div>
+            </div>
+            <!-- <Div: Home icons -->
+        <!-- User's role is EMPLOYEE --> 
+        <% } else { %>  
         <!-- <Div: Home icons -->
-        <div class="home-icons">
-            <!-- <Div: Add Student -->
-            <div class="hover icon-action"> <a href="/students/display-students"><div id="addStudent" class="icon"></div></a><h4>Add Student</h4></div>
-            <!-- <Div: Interview -->
-            <div class="hover icon-action"><a href="/interviews/display-interviews"><div id="addInterview" class="icon"></div></a><h4>Add Interview</h4></div>
-            <!-- <Div: Download Report -->
-            <div class="hover icon-action"><a href="/report/download-report"><div id="downloadReport" class="icon"></div></a><h4>Download Report</h4></div>
-            <!-- <Div: External Jobs -->
-            <div class="hover icon-action"><a href="/external-jobs/get-job-list"><div id="externalJobs" class="icon"></div></a><h4> External jobs</h4></div>
-        </div>
-        <!-- <Div: Home icons -->
-    <!-- if user is logged in -->
-     
+            <div class="home-icons">
+                <!-- <Div: Employee Dashboard  -->
+                <div class="hover icon-action"> <a href="/employee-dashboard/<%= locals.user.id %>"><div id="dashboard" class="icon"></div></a><h4>Dashboard</h4></div>
+            </div>
+            <!-- <Div: Home icons -->
+        <%}%>
+            
     <!-- User is not logged in -->
     <%} else {%>
         <!-- <Div: Home icons -->

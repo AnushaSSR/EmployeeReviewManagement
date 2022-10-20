@@ -1,22 +1,86 @@
-<%= title %>
-<!-- Style sheet link -->
+<link rel="stylesheet" href="/css/employee_dashboard.css"> <!-- Styling sheet link -->
 <%if (locals.user){ %>
-<!-- <Student details -->
+  <!-- Employee details section -->
   <section id="employee-details">
-    <div>
-     <h4> Employee Details</h4>
-      <div class="card" style="width: 18rem;">
-        <div class="card-header">
-          <h5><%= employee.name %></h5>
+    <div id="details">
+      <div class="text-center"><h4> Hello, <%= employee.name %></h4></div>
+      <!-- Employee Details card-->
+      <div class="card" style="width: 30rem;">
+        <!-- Employee Details Body with avatar and information-->
+        <div id="details-body">  
+          <!-- Employee avatar-->
+          <div class="card-body" id="gender-avatar" >
+            <% if( employee.gender == "Female"){%>
+              <img class="avatar" src="/images/female.jpg"> 
+            <% } else if( employee.gender == "Male"){%>
+              <img class="avatar" src="/images/male.jpg"> 
+            <% } else if( employee.gender == "Not_revealed"){%>
+              <img class="avatar" src="/images/gender neutral.png"> 
+            <% } %>
+          </div>
+          <!-- Employee avatar-->
+          <!-- Employee information-->        
+          <div class="card-body" id="details">
+            <p class="value">
+              <span> Name : </span>
+              <span> <%= employee.name %> </span>
+            </p>
+            <p class="value">
+              <span> Email : </span>
+              <span> <%= employee.email %> </span>
+            </p>
+            <p class="value">
+              <span> Age : </span>
+              <span> <%= employee.age %> </span>
+            </p>
+            <p class="value">
+              <span> Gender : </span>
+              <span> <%= employee.gender %> </span>
+            </p>
+            <p class="value">
+              <span>Mobile : </span>
+              <span><%= employee.phone_number %></span>
+            </p>
+          </div>
+          <!-- Employee information-->
         </div>
-        <div class="card-header">
-          <%= employee.name %>
-        </div>
+        <!-- Employee Details Body with avatar and information-->
       </div>
+      <!-- Employee Details card-->
     </div>
   </section>
+  <!-- Employee details section-->
+  <hr>
 
-  <section id="feedback-required">
+  <!-- Employee pending review details section-->
+  <section class="text-center" id="pending-reviews">
+    <div><h5> Pending Reviews</h5></div>
+    <!-- Reviewer list-->
+    <div id="pending-list">
+      <% if(employee.assigned_reviews.length){
+       for(feedback of employee.assigned_reviews) { %>
+        <div class="card margin" style="width: 20rem;">
+          <div id="employee-details">
+            <div class="card-body">
+              <p class="value"><span>Name:</span><span><%= feedback.name %></span></p>
+              <p class="value"><span>Gender:</span><span><%= feedback.gender %></span></p>
+            </div>
+            <div class="card-footer"> 
+              <a href="/employee/feedback-form/<%= employee.id %>/<%= feedback.id %>"><input  name="Assign Review" class="btn btn-primary" value="Review"></a>  
+            </div>
+          </div>   
+        </div>
+      <% } 
+      } else { %>
+        <div class="card-body text-center">
+          <p class="value">No pending Review to be submitted</span></p>
+        </div>      
+      <% } %>
+    </div>
+  </section>
+      <!-- Employee pending review details section-->
+
+<!--     
     <% for(f of employee.assigned_reviews) { %>
       <form>
         <h4> Pending Reviews</h4>
@@ -32,7 +96,7 @@
           </li>
         </ul>
       </form>
-    <%}%>
+    <%}%> -->
     <div>
   </section>
 <% } %>

@@ -1,0 +1,66 @@
+/* Styling to mange employee profile section */
+#manage-employee-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+/* Styling to navigateion buttons */
+
+/* Alignment and display of navigation icons */
+#navigation {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2%;
+}
+
+/* font styling for navigation text */
+.nav-text {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: black;
+}
+
+/* Styling for update section */
+
+/*display update section items in flex */
+#update {
+  display: flex;
+  justify-content: space-around;
+}
+
+/*  card border */
+.card {
+  border: 3px solid purple;
+}
+
+/* card header properties */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* employee details card-body properties */
+#details-body {
+  margin: 2%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/*Employee avatar dimensions*/
+.avatar {
+  width: 200px;
+  height: 200px;
+}
+
+/*button color */
+.btn-primary {
+  background-color: #d353cd;
+}
+
+/*delete employee button margin*/
+#delete-employee {
+  margin-bottom: 2%;
+}

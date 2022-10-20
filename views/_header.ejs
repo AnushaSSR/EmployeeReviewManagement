@@ -1,106 +1,80 @@
 <script src="https://kit.fontawesome.com/d1d222bc45.js" crossorigin="anonymous"></script>
 <header>
-    <!-- Navbar container -->
-    <nav class="navbar navbar-expand-lg navbar-dark  ">
-        <!-- Navigation menu -->
-        <div class="container-fluid">
-            <!-- Logo -->
-            <a class="navbar-brand" href="/">
-                <img
-                    src="/images/background2.jpg"
-                    width="80"
-                    height="40"
-                    alt="logo"
-                >
-            </a>
-            <!-- Logo -->
-            <!-- Toggler button -->
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- Toggler button -->
-            <!-- Nav Bar collapsible -->
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <!-- Nav Bar list-->
-                <ul class="navbar-nav">
-                    <!-- Nav Menu : HOME -->
-
-                    <% if(locals.user) { %>
-
-                        <% let home=" "; %>
-                        <%= home %>
-                        <% if(locals.user.role == "Admin") {%>
-                            
-                            <% home = "/admin-dasboard/"+locals.user._id %>
-                          
-                        <% } else {%> 
-                            <% home = "/employee-dasboard/"+locals.user._id %>
-                        <% } %> 
-
-                        <!-- <li class="nav-item">
-                            <a class="nav-link"  href= <%= home %> >Home</a>
-                        </li>
-                    -->
-                        <% } else {%>
-
-
-                   
-                        <li class="nav-item">
-                            <a class="nav-link"  href= '/' >Home</a>
-                        </li>
-                        <% } %>
-                    
-            
-            
-    
-                       
-    
-                  <% if(locals.user){ %>
-                   
-                    
-                      
-                    <!-- Nav Menu : HOME -->
-                    <!-- if user is logged in -->
-                        <!-- Nav item: User / Sign out -->                       
-                        <li>
-                            <!-- Nav item: Sign out -->                       
-                            <li class="nav-item">  
-                                 <a class="nav-link" href="/sign-out"> Sign Out</a>
-                            </li>
-                            <!-- Nav item: Sign out -->                       
-                            <!-- Nav item: User -->                       
-                            <li class="nav-item text-center"> <a class="nav-link" href="/">
-                                <div><button style="border:none; background-color: #0aa1f2;"><i class="fa-solid fa-user"></i></button></div>Hi, <%= user.name %></a>
-                            </li>
-                            <!-- Nav item: User -->                       
-                        </li>
-                        <!-- //user session does not exists or user not logged in  -->
-                    <% } else { %>
-                        <!-- Nav item: Sign in-->
-                        <li class="nav-item">
-                            <a class="nav-link" href="/sign-in">Sign In</a>
-                        </li>
-                        <!-- Nav item: Sign in-->
-                        <!-- Nav item: Sign up-->
-                        <li class="nav-item">
-                            <a class="nav-link" href="/sign-up"> Sign Up</a>
-                        </li>
-                        <!-- Nav item: Sign up-->
-                    <% } %>           
-                </ul>
-                <!-- Nav Bar list-->
-            </div>
-            <!-- Nav Bar collapsible -->
-        </div>
-        <!-- Navigation menu -->
-    </nav>
-    <!-- Navbar container -->
+	<!-- Navbar container -->
+  <nav class="navbar navbar-expand-lg navbar-dark  ">
+    <!-- Navigation menu -->
+			<div class="container-fluid">
+				<!-- Logo -->
+				<a class="navbar-brand" href="/">
+						<img
+								src="/images/logo.jpg"
+								width="80"
+								height="40"
+								alt="logo"
+						>
+				</a>
+				<!-- Logo -->
+				<!-- Toggler button -->
+				<button
+						class="navbar-toggler"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#navbarNavDropdown"
+						aria-controls="navbarNavDropdown"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+				>
+						<span class="navbar-toggler-icon"></span>
+				</button>
+				<!-- Toggler button -->
+				<!-- Nav Bar collapsible -->
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+						<!-- Nav Bar list-->
+						<ul class="navbar-nav">
+							<!-- Nav Menu : HOME -->  
+							<li class="nav-item">
+									<a class="nav-link"  href= '/' >Home</a>
+							</li>
+							<!-- Nav Menu : HOME -->     
+							<% if(locals.user){ %>
+							<!-- if user is logged in -->
+								<!-- Nav item: User / Sign out -->                       
+								<li>
+									<!-- Nav item: Sign out -->                       
+									<li class="nav-item">  
+										<a class="nav-link" href="/sign-out"> Sign Out</a>
+									</li>
+									<!-- Nav item: Sign out -->                       
+									<!-- Nav item: User -->                       
+									<li class="nav-item text-center">
+										<a class="nav-link" href="/">
+											<div><button style="border:none; background-color: pink;">
+												<i class="fa-solid fa-user"></i></button>
+											</div>Hi, <%= user.name %>
+										</a>
+									</li>
+									<!-- Nav item: User -->                       
+								</li>
+								<!-- Nav item: User / Sign out -->                       
+							<% } else { %>
+							<!-- //user session does not exists or user not logged in  -->
+								<!-- Nav item: Sign in-->
+								<li class="nav-item">
+										<a class="nav-link" href="/sign-in">Sign In</a>
+								</li>
+								<!-- Nav item: Sign in-->
+								<!-- Nav item: Sign up-->
+								<li class="nav-item">
+										<a class="nav-link" href="/sign-up"> Sign Up</a>
+								</li>
+								<!-- Nav item: Sign up-->
+							<% } %>           
+						</ul>
+						<!-- Nav Bar list-->
+				</div>
+				<!-- Nav Bar collapsible -->
+			</div>
+			<!-- Navigation menu -->
+	</nav>
+	<!-- Navbar container -->
 </header>

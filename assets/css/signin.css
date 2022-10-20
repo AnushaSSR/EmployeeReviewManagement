@@ -1,38 +1,32 @@
-/*set the backf=ground color*/
-main {
-    /* background-color: #f6bbf7; */
-}
-
 /*border to body */
 body {
-    border: 2px solid #d353cd;
+  border: 2px solid #d353cd;
 }
 
 /*Sign in div styling */
 
 /*Set margin to div and align the contents*/
 #signin {
-    margin: 5% 10%;
-    text-align: center;
-    width: 80%;
+  margin: 5% 10%;
+  text-align: center;
+  width: 80%;
 }
 
 /*align the form into center and adjust width*/
 #signin-form {
-    margin-top: 3%;
-    margin-left: auto;
-    margin-right: auto;
-    width: 60%;
+  margin-top: 3%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
 }
 
 /*setting the outline of the form input*/
 .form-outline {
-    color: #d353cd;
-    background-color: #d353cd;
+  color: #d353cd;
+  background-color: #d353cd;
 }
-
 
 /*set the background color of the sign in button */
 .btn-primary {
-    background-color: #d353cd;
+  background-color: #d353cd;
 }

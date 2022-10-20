@@ -21,11 +21,13 @@ const reviewSchema = new mongoose.Schema(
     additional_feedback: {
       type: "String",
     },
+    //Review given to
     review_to: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
+    //Reviewed by
     reviewed_by: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

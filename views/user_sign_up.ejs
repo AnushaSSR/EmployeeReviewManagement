@@ -41,19 +41,24 @@
             </div>
             <!-- Age input -->
             <!-- Gender input -->
-            <div class="form-outline mb-4 text">
+            <div class="form-outline mb-4 form-control" id="gender">
                 <p>Select your gender:</p>
                 <div id="gender-selection">
                     <span>
-                        <input type="radio" name="gender" value="male">
+                        <input
+                            type="radio"
+                            name="gender"
+                            value="Male"
+                            required
+                        >
                         Male
                     </span>
                     <span>
-                        <input type="radio" name="gender" value="female">
+                        <input type="radio" name="gender" value="Female">
                         Female
                     </span>
                     <span>
-                        <input type="radio" name="gender" value="not-revealed">
+                        <input type="radio" name="gender" value="Not_revealed">
                         Prefer not to reveal
                     </span>
                 </div>
