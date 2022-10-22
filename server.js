@@ -45,7 +45,7 @@ app.set("views", "./views");
 app.use(
   session({
     name: "Placement Cell",
-    secret: process.env.LOCAL_SECRET,
+    secret: process.env.LOCAL_SECRET || "blahsecret",
     saveUninitialized: false,
     resave: false,
     cookie: {
