@@ -179,15 +179,14 @@
 
                       <!-- Team work rating list item-->
                       <li class="list-group-item key-value">
-                        <span class="key">teamwork:</span>
+                        <span class="key">Teamwork: </span>
                         <span class="value" style="display: inline;"><%=review.teamwork %></span>
                         <select name="teamwork" id="teamwork" class="form-select edit" style="display: none;">
-                          <option value="" disabled selected>selected: <%=review.teamwork %> </option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
+                          <option value="1" <%= review.teamwork == "1" ? "selected" : "" %>>1</option>
+                          <option value="2" <%= review.teamwork == "2" ? "selected" : "" %>>2</option>
+                          <option value="3" <%= review.teamwork == "3" ? "selected" : "" %>>3</option>
+                          <option value="4" <%= review.teamwork == "4" ? "selected" : "" %>>4</option>
+                          <option value="5" <%= review.teamwork == "5" ? "selected" : "" %>>5</option>
                         </select>
                       </li>
                       <!-- Team work rating list item-->
@@ -197,12 +196,11 @@
                         <span class="key">Knowledge:</span>
                         <span class="value" style="display: inline;"><%=review.work_knowledge %></span>
                         <select name="knowledge" id="teamwork" class="form-select edit" style="display: none;" >
-                          <option value="" disabled selected> selected: <%=review.work_knowledge %></option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
+                          <option value="1" <%= review.work_knowledge == "1" ? "selected" : "" %>>1</option>
+                          <option value="2" <%= review.work_knowledge == "2" ? "selected" : "" %>>2</option>
+                          <option value="3" <%= review.work_knowledge == "3" ? "selected" : "" %>>3</option>
+                          <option value="4" <%= review.work_knowledge == "4" ? "selected" : "" %>>4</option>
+                          <option value="5" <%= review.work_knowledge == "5" ? "selected" : "" %>>5</option>
                         </select>
                       </li>
                       <!-- Knowledge rating list item-->
@@ -212,12 +210,11 @@
                         <span class="key">Communication:</span>
                         <span class="value"  style="display: inline;"><%=review.communication_with_team %></span>
                         <select name="communication" id="teamwork" class="form-select mb-4 edit" style="display: none;" >
-                          <option value="" disabled selected>selected: <%=review.communication_with_team %></option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
+                          <option value="1" <%= review.communication_with_team == "1" ? "selected" : "" %>>1</option>
+                          <option value="2" <%= review.communication_with_team == "2" ? "selected" : "" %>>2</option>
+                          <option value="3" <%= review.communication_with_team == "3" ? "selected" : "" %>>3</option>
+                          <option value="4" <%= review.communication_with_team == "4" ? "selected" : "" %>>4</option>
+                          <option value="5" <%= review.communication_with_team == "5" ? "selected" : "" %>>5</option>
                         </select>
                       </li>
                       <!-- Communication rating list item-->
@@ -300,10 +297,11 @@
       }
       const values= document.getElementsByClassName("value");
       for(v of values) {
-        if (v.style.display=='block') {
+        if (v.style.display=='block' || v.style.display=='inline') {
             v.style.display = 'none';
         } else {
-          v.style.display = 'block';   
+          v.style.display = 'block';
+          v.style.display = "inline";   
         }
       } 
     }

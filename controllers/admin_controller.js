@@ -136,6 +136,7 @@ module.exports.updateDetails = async function (req, res) {
   try {
     if (admin && req.params.adminid === res.locals.user.id) {
       if (employee) {
+        console.log(employee);
         //creating variables for details to be update, send from the body
         const name = req.body.name;
         const age = req.body.age;
@@ -149,6 +150,12 @@ module.exports.updateDetails = async function (req, res) {
           employee.age = age;
         }
         if (number != "") {
+          if (number.length != 10) {
+            //if the password and confrim passwords didn't match
+            req.flash("error", "Enter valid 10 digit mobile number");
+            return res.redirect("back");
+          }
+
           employee.phone_number = number;
         }
         if (gender != "") {

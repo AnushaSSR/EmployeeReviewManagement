@@ -24,7 +24,7 @@
             <div class="card-header">
               <h5> Employee Details Card</h5>
               <!-- Edit details icon  -->
-              <span id="edit-details" onclick="openInput()" ><span  id="text-value">Edit details </span> <i id="icon-edit" class="fa-solid fa-pen"></i> </span>
+              <span id="edit-details" onclick="openInput()" style="cursor: pointer;" ><span  id="text-value">Edit details </span> <i id="icon-edit" class="fa-solid fa-pen"></i> </span>
               <!-- Edit details icon  -->
             </div>
             <!-- Employee Details card header -->
@@ -55,13 +55,12 @@
                   <input class="edit" type="number" style="display: none;" name="age" id="age" placeholder="<%= employee.age %>">
                 </p>
                 <p>
-                  <span>Gender : </span>
+                  <span>Gender :</span>
                   <span class="value" style="display: inline;"><%= employee.gender %></span>
                   <select name="gender" id="gender" class="form-select edit" style="display: none;" >
-                    <option value="" disabled selected> selected: <%= employee.gender %></option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Not_revealed">Dont reveal</option>
+                    <option value="Male" <%= employee.gender == "Male" ? "selected" : "" %>>Male</option>
+                    <option value="Female" <%= employee.gender == "Female" ? "selected" : "" %>>Female</option>
+                    <option value="Not_revealed" <%= employee.gender == "Not_revealed" ? "selected" : "" %>>Dont reveal</option>
                   </select>
                 </p>
                 <p>
