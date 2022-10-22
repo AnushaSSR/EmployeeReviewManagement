@@ -136,7 +136,6 @@ module.exports.updateDetails = async function (req, res) {
   try {
     if (admin && req.params.adminid === res.locals.user.id) {
       if (employee) {
-        console.log(employee);
         //creating variables for details to be update, send from the body
         const name = req.body.name;
         const age = req.body.age;
