@@ -53,7 +53,9 @@ app.use(
     },
     store: MongoStore.create(
       {
-        mongoUrl: process.env.DATABASE_URL,
+        mongoUrl:
+          process.env.DATABASE_URL ||
+          "mongodb+srv://awsCluster:awsPwd@employeereview.e8xxkt4.mongodb.net/test",
         autoRemove: "disabled",
       },
       function (err) {
