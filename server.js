@@ -16,7 +16,7 @@ require("dotenv").config();
 const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
 
-const MongoStore = require("connect-mongo").default;
+const MongoStore = require("connect-mongo").defaultMaxListeners;
 //to dsiplay the flash messages to user
 const flash = require("connect-flash");
 const customMware = require("./config/middleware");
