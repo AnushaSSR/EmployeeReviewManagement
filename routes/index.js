@@ -29,18 +29,10 @@ router.post(
 router.get("/sign-out", homeController.destroySession);
 
 //protected route to get the employee dashboard
-router.get(
-  "/employee-dashboard/:id",
-  passport.authenticate("local", { failureRedirect: "/sign-in" }),
-  homeController.employeeDashboard
-);
+router.get("/employee-dashboard/:id", homeController.employeeDashboard);
 
 //protected route to get the admin dashboard
-router.get(
-  "/admin-dashboard/:id",
-  passport.authenticate("local", { failureRedirect: "/sign-in" }),
-  homeController.adminDashboard
-);
+router.get("/admin-dashboard/:id", homeController.adminDashboard);
 
 //use the admin route
 router.use("/admin", require("./admin"));

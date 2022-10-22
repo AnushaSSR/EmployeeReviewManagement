@@ -1,4 +1,8 @@
 /* footer background color */
 .bg {
-    background-color: #d353cd;
+  background-color: #d353cd;
+}
+footer {
+  /* position: absolute; */
+  width: 100%;
 }
