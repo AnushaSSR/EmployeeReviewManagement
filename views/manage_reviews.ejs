@@ -165,7 +165,7 @@
                       <span class="key">Reviewer: <%=review.reviewed_by.name %> </span>   
                       <span class="key">Rating: <%= review.teamwork+review.work_knowledge+review.communication_with_team %> </span>   
                       <!-- view Review details link -->
-                      <span class="value"><a id="view-details-<%= review._id %>" class="view-details" onclick="openDetails('<%= review._id%>')">View Details</a></span>
+                      <span class="value"><a id="view-details-<%= review._id %>" style="cursor: pointer;" class="view-details" onclick="openDetails('<%= review._id%>')">View Details</a></span>
                     </div>
                     <!-- Review card header-->
                     <!-- Rating details list-->
@@ -234,7 +234,7 @@
                       <!-- Link to edit Rating-->
                       <li class="list-group-item text-center"  style="display: block;">
                         <!-- edit ratings Button-->
-                        <span class="value" style="display: block;" id="edit-details" onclick="openInput('<%= review._id %>')">Edit Ratings
+                        <span class="value" style="display: block; cursor: pointer;" id="edit-details" onclick="openInput('<%= review._id %>')">Edit Ratings
                           <i class="fa-solid fa-pen"></i>
                         </span>                            
                       </li>
