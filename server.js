@@ -45,7 +45,7 @@ app.set("views", "./views");
 app.use(
   session({
     name: "Placement Cell",
-    secret: process.env.LOCAL_SECRET || "blahsecret",
+    secret: process.env.LOCAL_SECRET,
     saveUninitialized: false,
     resave: false,
     cookie: {
@@ -53,9 +53,7 @@ app.use(
     },
     store: MongoStore.create(
       {
-        mongoUrl:
-          process.env.DATABASE_URL ||
-          "mongodb+srv://awsCluster:awsPwd@employeereview.e8xxkt4.mongodb.net/test",
+        mongoUrl: process.env.DATABASE_URL,
         autoRemove: "disabled",
       },
       function (err) {
