@@ -62,7 +62,7 @@ module.exports.manageProfile = async function (req, res) {
     //employee details by employee id
     let employee = await User.findById(req.params.empid);
     if (admin && req.params.adminid === res.locals.user.id) {
-      if (employee) {
+      if (employee && employee.role != "Admin") {
         //employees details by employee role
         let employees = await User.find({ role: "Employee" });
         return res.render("manage_profile", {
@@ -226,7 +226,7 @@ module.exports.manageReviews = async function (req, res) {
   let employee = await User.findById(req.params.empid);
   try {
     if (admin && req.params.adminid === res.locals.user.id) {
-      if (employee) {
+      if (employee && employee.role != "Admin") {
         let reviews = await Review.find({ review_to: req.params.empid })
           .populate({
             path: "reviewed_by",
