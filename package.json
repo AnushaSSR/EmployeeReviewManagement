@@ -17,6 +17,7 @@
     "mongodb-connection-string-url": "^2.5.4",
     "mongoose": "^6.6.5",
     "node": "^19.0.0",
+    "nodemon": "^2.0.20",
     "parseurl": "^1.3.3",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",

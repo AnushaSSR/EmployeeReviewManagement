@@ -53,7 +53,9 @@ app.use(
     },
     store: MongoStore.create(
       {
-        mongoUrl: process.env.DATABASE_URL,
+        mongoUrl:
+          "mongodb+srv://ERM:erm@cluster0.geyqj6n.mongodb.net/?retryWrites=true&w=majority" ||
+          process.env.DATABASE_URL,
         autoRemove: "disabled",
       },
       function (err) {
