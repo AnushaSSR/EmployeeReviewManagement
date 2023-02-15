@@ -29,4 +29,4 @@
 This will run on Port: 8000 (if nothing is specified in env port). 
 
 
-# <a href="https://employee-review-management.herokuapp.com/" target="_blank">Click here</a> to see the ERM.
+# <a href="https://employee-review-management.onrender.com" target="_blank">Click here</a> to see the ERM.
